@@ -4,6 +4,7 @@ export interface IntUser {
   email: string;
   titile: string;
   organization: string;
+  token: string;
 }
 
 interface IntSearchForm {

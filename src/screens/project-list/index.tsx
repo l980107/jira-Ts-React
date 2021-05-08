@@ -15,6 +15,7 @@ const ProjectList = () => {
   });
   const [list, setList] = useState([]);
   const debounceParam = useDebounce(param, 300);
+
   useEffect(() => {
     fetch(
       `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
