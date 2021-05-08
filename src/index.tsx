@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom";
-
+import { loadDevTools } from "jira-dev-tool";
 import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+loadDevTools(() => {
+  ReactDOM.render(<App />, document.getElementById("root"));
+});
