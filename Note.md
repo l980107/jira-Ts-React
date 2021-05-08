@@ -107,7 +107,8 @@ enum Color {
 let c: Color = Color.Red;
 ```
 
-11. null 和 undefined
+11. **null** 和 **undefined**
+
     > null 和 undefined 在 Ts 中既是一个值，也是一个类型：
 
 ```ts
@@ -115,7 +116,7 @@ let u: undefined = undefined;
 let n: null = null;
 ```
 
-12. unknown
+12. **unknown**
 
 > unknown 表示这个值可以是任何值（严格版的 any）在想用 any 的时候可以使用 unknown 来代替
 
@@ -128,7 +129,7 @@ const isFalsy = (value: any) => {
 };
 ```
 
-13. never
+13. **never**
 
 ```ts
 //这个函数返回的就是never，用到的比较少，在类型操作等场景会用到

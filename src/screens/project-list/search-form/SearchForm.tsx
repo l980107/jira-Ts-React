@@ -5,6 +5,7 @@ export interface IntUser {
   titile: string;
   organization: string;
 }
+
 interface IntSearchForm {
   users: IntUser[];
   param: {
