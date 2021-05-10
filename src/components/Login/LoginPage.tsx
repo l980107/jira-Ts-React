@@ -1,26 +1,8 @@
+import { useAuth } from "../../context/auth-context";
 import { FormEvent } from "react";
-interface Param {
-  username: string;
-  password: string;
-}
 
-const aipUrl = process.env.REACT_APP_API_URL;
-
-const Login = () => {
-  const login = (param: Param) => {
-    fetch(`${aipUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(param),
-    }).then(async (response) => {
-      if (response.ok) {
-        await console.log("发送请求");
-      }
-    });
-  };
-
+const LoginPage = () => {
+  const { login, user } = useAuth();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement)
@@ -45,4 +27,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { IntUser } from "screens/project-list/search-form/SearchForm";
 import * as AuthMethod from "../auth-provider";
 
@@ -19,35 +19,35 @@ const AuthContext = React.createContext<
 >(undefined);
 AuthContext.displayName = "AuthContext";
 
-//身份验证供应，编写逻辑代码
-export const AuthProdiver = () => {
-  //保存登陆user
+export const AuthProdiver = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IntUser | null>(null);
-  //登陆
+
   const login = (form: AuthForm) => {
     return AuthMethod.login(form).then(setUser);
   };
-  //注册
+
   const register = (form: AuthForm) => {
     return AuthMethod.register(form).then(setUser);
   };
-  //登出
-  const logout = () => {
-    return AuthMethod.logout().then(() => setUser(null));
+
+  const logout = async () => {
+    await AuthMethod.logout();
+    return setUser(null);
   };
 
   return (
     <AuthContext.Provider
+      children={children}
       value={{ user, login, register, logout }}
     ></AuthContext.Provider>
   );
 };
 
-//使用
 export const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth必须在AuthProvider中使用");
+    throw new Error("useAuth必须在AuthProvider使用");
   }
+
   return context;
 };
