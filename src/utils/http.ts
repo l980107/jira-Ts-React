@@ -5,6 +5,13 @@ interface Config extends RequestInit {
   token: string;
 }
 
+/**
+ * 封装fetch请求
+ *
+ * @param { string } endpoint 路由地址
+ * @param { Config } param1
+ * @returns
+ */
 export const http = async (
   endpoint: string,
   { data, token, headers, ...customConfig }: Config

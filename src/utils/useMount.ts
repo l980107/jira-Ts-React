@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react";
-//didMount
+
+/**
+ * 自定义hook在组件挂在完毕执行一次
+ *
+ * @param callback
+ */
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
   }, []);
 };
 
+/**
+ * 自定义防抖节流
+ *
+ * @param value
+ * @param delay
+ * @returns
+ */
 export const useDebounce = <T>(value: T, delay: number) => {
   const [debounceValue, setDebounceValue] = useState(value);
 
