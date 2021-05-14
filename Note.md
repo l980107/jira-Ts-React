@@ -13,7 +13,7 @@ let binary: number = 0b1010;
 2. **string**
 
 ```ts
-const name: string = "jack";
+const name: string = 'jack';
 ```
 
 3. **array**
@@ -28,13 +28,13 @@ const list: Array<number> = [1, 2, 3];
 interface User {
   name: string;
 }
-const john = { name: "john" };
-const jack = { name: "jack" };
+const john = { name: 'john' };
+const jack = { name: 'jack' };
 let personList = [john, jack]; //john和jack都是User类型
 
 // -----|
 //混合类型的“数组”：
-let arr = ["jack", 10]; //在Ts中不是array，叫做tuple
+let arr = ['jack', 10]; //在Ts中不是array，叫做tuple
 ```
 
 4. **boolean**
@@ -146,7 +146,7 @@ interface User {
   age: number;
 }
 
-const u: User = { name: "jack", age: 18 };
+const u: User = { name: 'jack', age: 18 };
 ```
 
 > 啥时候需要声明类型: 理论上讲我们声明任何变量的时候都需要声明类型（包括普通变量、函数、组件、hook 等），声明函数、组件、hook 的时候声明的是其**参数**和**返回值**类型，Ts 有自动推断，我们有些时候就不需要声明类型了 eg：
@@ -171,3 +171,9 @@ const isFalsy = (value: unknown) => {
 JS 文件 + .d.ts 文件 === ts 文件
 
 > .d.ts 文件可以让 Js 文件继续维持自己 Js 文件的身份，而拥有 Ts 的类型保护一般我们写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts 文件
+
+# 方法总结
+
+qs.xxx() 和 JSON.xxx() 都是格式化对象的
+
+body.json() 接收一个 response 流，返回一个 promise，promise 解析的 resolve 结果是将文本解析为 json 格式

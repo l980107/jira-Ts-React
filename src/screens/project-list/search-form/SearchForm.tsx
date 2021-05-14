@@ -13,7 +13,7 @@ interface IntSearchForm {
     name: string;
     personId: string;
   };
-  setParam: (param: IntSearchForm["param"]) => void;
+  setParam: (param: IntSearchForm['param']) => void;
 }
 
 const SearchForm = ({ users, param, setParam }: IntSearchForm) => {

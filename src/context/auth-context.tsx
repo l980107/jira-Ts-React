@@ -1,6 +1,8 @@
-import React, { ReactNode, useState } from "react";
-import { IntUser } from "screens/project-list/search-form/SearchForm";
-import * as AuthMethod from "../auth-provider";
+import React, { ReactNode, useState } from 'react';
+import { IntUser } from 'screens/project-list/search-form/SearchForm';
+import { http } from 'utils/http';
+import { useMount } from 'utils/useMount';
+import * as AuthMethod from '../auth-provider';
 
 //登陆传参接口
 interface AuthForm {
@@ -18,7 +20,21 @@ const AuthContext = React.createContext<
     }
   | undefined
 >(undefined);
-AuthContext.displayName = "AuthContext";
+AuthContext.displayName = 'AuthContext';
+
+/**
+ * 初始化user 避免刷新登出
+ * @returns user
+ */
+export const initUser = async () => {
+  let user = null;
+  const token = AuthMethod.getToken();
+  if (token) {
+    const data = await http('me', { token });
+    user = data.user;
+  }
+  return user;
+};
 
 /**
  * 身份验证提供组件，顶级组件，用于向下传递context
@@ -42,6 +58,10 @@ export const AuthProdiver = ({ children }: { children: ReactNode }) => {
     return setUser(null);
   };
 
+  useMount(() => {
+    initUser().then(setUser);
+  });
+
   return (
     <AuthContext.Provider
       children={children}
@@ -58,7 +78,7 @@ export const AuthProdiver = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth必须在AuthProvider使用");
+    throw new Error('useAuth必须在AuthProvider使用');
   }
 
   return context;

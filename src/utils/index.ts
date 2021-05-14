@@ -2,6 +2,12 @@ export const isFalsy = (value: unknown) => {
   return value === 0 ? false : !value;
 };
 
+/**
+ * 去空对象
+ *
+ * @param obj
+ * @returns
+ */
 export const cleanObject = (obj: object) => {
   const result = { ...obj };
   Object.keys(result).forEach((key) => {
