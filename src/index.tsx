@@ -1,7 +1,8 @@
-import ReactDOM from "react-dom";
-import { loadDevTools } from "jira-dev-tool";
-import App from "./App";
-import { AppProviders } from "./context/index";
+import ReactDOM from 'react-dom';
+import { loadDevTools } from 'jira-dev-tool';
+import 'antd/dist/antd.less';
+import App from './App';
+import { AppProviders } from './context/index';
 
 loadDevTools(() => {
   ReactDOM.render(
@@ -9,6 +10,6 @@ loadDevTools(() => {
       <App />
     </AppProviders>,
 
-    document.getElementById("root")
+    document.getElementById('root'),
   );
 });

@@ -172,6 +172,40 @@ JS 文件 + .d.ts 文件 === ts 文件
 
 > .d.ts 文件可以让 Js 文件继续维持自己 Js 文件的身份，而拥有 Ts 的类型保护一般我们写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts 文件
 
+## Utility type
+
+> Utility type 也是对数据进行类型限定，但是变得灵活、可操作
+
+### Partial
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+// Partial,Utility type可以将参数变为不强制性
+const xiaoMing: Partial<Person> = { name: 'xiaoMing' };
+const xiaoHong: Partial<Person> = { age: 19 };
+const person: Partial<Person> = {};
+//以上都是可以的相当于将interface Person中的每个参数都加了?
+```
+
+### Omit
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+//Omit,Utility type可以去除传入类型集的参数
+const shenMiRen: Omit<Person, 'name'> = { age: 19 };
+const shenMiRen: Omit<Person, 'age'> = { name: 'shenMiRen' };
+const shenMiRen: Omit<Person, 'name'> = { name: 'shenMiRen' }; //Error
+const shenMiRen: Omit<Person, 'name' | 'age'> = {}; //使用联合类型将name 和 age 参数都删掉，形成新的类型
+const shenMiRen: Omit<Person, 'name'> = {}; //Error
+```
+
 # 方法总结
 
 qs.xxx() 和 JSON.xxx() 都是格式化对象的
