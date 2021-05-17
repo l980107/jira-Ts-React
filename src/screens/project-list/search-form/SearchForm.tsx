@@ -1,4 +1,4 @@
-import { Input, Select } from 'antd';
+import { Input, Select, Form } from 'antd';
 
 export interface IntUser {
   id: string;
@@ -20,20 +20,27 @@ interface IntSearchForm {
 
 const SearchForm = ({ users, param, setParam }: IntSearchForm) => {
   return (
-    <div>
-      <Input
-        type="text"
-        placeholder="项目名"
-        value={param.name}
-        onChange={(evt) => setParam({ ...param, name: evt.target.value })}
-      />
-      <Select value={param.personId} onChange={(value) => setParam({ ...param, personId: value })}>
-        <Select.Option value=""> 负责人</Select.Option>
-        {users.map((item) => (
-          <option value={item.id}>{item.name}</option>
-        ))}
-      </Select>
-    </div>
+    <Form style={{ marginBottom: '2rem' }} layout={'inline'}>
+      <Form.Item>
+        <Input
+          type="text"
+          placeholder="项目名"
+          value={param.name}
+          onChange={(evt) => setParam({ ...param, name: evt.target.value })}
+        />
+      </Form.Item>
+      <Form.Item>
+        <Select
+          value={param.personId}
+          onChange={(value) => setParam({ ...param, personId: value })}
+        >
+          <Select.Option value=""> 负责人</Select.Option>
+          {users.map((item) => (
+            <option value={item.id}>{item.name}</option>
+          ))}
+        </Select>
+      </Form.Item>
+    </Form>
   );
 };
 
