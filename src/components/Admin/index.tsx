@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useAuth } from 'context/auth-context';
 import { Button } from 'antd';
 import ProjectList from '../../screens/project-list';
-import { Row } from 'components/lib.tsx';
+import { Row } from 'components/lib';
 
 export default function Admin() {
   const { logout } = useAuth();
