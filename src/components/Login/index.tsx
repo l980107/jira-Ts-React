@@ -15,7 +15,6 @@ const Login = () => {
       <Background />
       <ShadowCard>
         <Title>{isLogin ? '请登录' : '请注册'}</Title>
-
         {isLogin ? <LoginPage /> : <RegisterPage />}
         <Divider />
         <a onClick={() => setIsLogin(!isLogin)}>
@@ -42,7 +41,7 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: left bottom, right bottom;
-  background-size: calc(((100vw - 40rem) / 2 - 3.2rem), ((100vw - 40rem) / 2 - 3.2rem), cover);
+  background-size: calc(((100vw - 40rem) / 2) - 3.2rem), calc(((100vw - 40rem) / 2) - 3.2rem), cover;
   background-image: url(${left}), url(${right});
 `;
 
