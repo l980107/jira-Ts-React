@@ -1,11 +1,10 @@
 // import { useAuth } from 'context/auth-context';
 import { useAuth } from '../../context/auth-context';
-import { FormEvent } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input } from 'antd';
 import { LongButton } from './index';
 
 const RegisterPage = () => {
-  const { register, user } = useAuth();
+  const { register } = useAuth();
   const handleSubmit = (values: { username: string; password: string }) => {
     register(values);
   };

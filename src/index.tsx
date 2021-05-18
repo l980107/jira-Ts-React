@@ -1,12 +1,13 @@
 import ReactDOM from 'react-dom';
-import { loadDevTools } from 'jira-dev-tool';
+import { DevTools, loadServer } from 'jira-dev-tool';
 import 'antd/dist/antd.less';
 import App from './App';
 import { AppProviders } from './context/index';
 
-loadDevTools(() => {
+loadServer(() => {
   ReactDOM.render(
     <AppProviders>
+      <DevTools />
       <App />
     </AppProviders>,
 

@@ -29,6 +29,7 @@ const SearchForm = ({ users, param, setParam }: IntSearchForm) => {
           onChange={(evt) => setParam({ ...param, name: evt.target.value })}
         />
       </Form.Item>
+
       <Form.Item>
         <Select
           value={param.personId}
@@ -36,7 +37,7 @@ const SearchForm = ({ users, param, setParam }: IntSearchForm) => {
         >
           <Select.Option value=""> 负责人</Select.Option>
           {users.map((item) => (
-            <option value={item.id}>{item.name}</option>
+            <Select.Option value={item.id}>{item.name}</Select.Option>
           ))}
         </Select>
       </Form.Item>

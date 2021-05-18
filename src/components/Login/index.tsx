@@ -17,9 +17,9 @@ const Login = () => {
         <Title>{isLogin ? '请登录' : '请注册'}</Title>
         {isLogin ? <LoginPage /> : <RegisterPage />}
         <Divider />
-        <a onClick={() => setIsLogin(!isLogin)}>
+        <Button type={'link'} onClick={() => setIsLogin(!isLogin)}>
           {isLogin ? '还没有账号？去注册一个吧！' : '已经有账号了? 直接登陆吧！'}
-        </a>
+        </Button>
       </ShadowCard>
     </Container>
   );

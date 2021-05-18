@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { useAuth } from 'context/auth-context';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Menu, Button } from 'antd';
 import ProjectList from '../../screens/project-list';
 import { Row } from 'components/lib';
 import { ReactComponent as Logo } from '../../assets/software-logo.svg';
-
+import { DownOutlined } from '@ant-design/icons';
 export default function Admin() {
   const { logout, user } = useAuth();
   return (
@@ -20,12 +20,17 @@ export default function Admin() {
             overlay={
               <Menu>
                 <Menu.Item>
-                  <a onClick={logout}>登出</a>
+                  <Button type={'link'} onClick={logout}>
+                    登出
+                  </Button>
                 </Menu.Item>
               </Menu>
             }
           >
-            <a onClick={(e) => e.preventDefault()}>Hi, {user?.name}</a>
+            <Button type={'link'} onClick={(e) => e.preventDefault()}>
+              Hi, {user?.name}
+              <DownOutlined />
+            </Button>
           </Dropdown>
         </HeaderRight>
       </Header>
