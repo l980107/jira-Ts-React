@@ -1,6 +1,8 @@
+import { FullPageError, FullPageLoading } from 'components/lib';
 import React, { ReactNode, useState } from 'react';
 import { IntUser } from 'screens/project-list/search-form/SearchForm';
 import { http } from 'utils/http';
+import { useAsync } from 'utils/useAsync';
 import { useMount } from 'utils/useMount';
 import * as AuthMethod from '../auth-provider';
 
@@ -43,7 +45,16 @@ export const initUser = async () => {
  * @returns user 登陆成功的用户信息  login 登陆方法  register 注册方法 logout  登出方法
  */
 export const AuthProdiver = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<IntUser | null>(null);
+  // const [user, setUser] = useState<IntUser | null>(null);
+  const {
+    data: user,
+    error,
+    isLoading,
+    setData: setUser,
+    isError,
+    isIdle,
+    run,
+  } = useAsync<IntUser | null>();
 
   const login = (form: AuthForm) => {
     return AuthMethod.login(form).then(setUser);
@@ -59,9 +70,16 @@ export const AuthProdiver = ({ children }: { children: ReactNode }) => {
   };
 
   useMount(() => {
-    initUser().then(setUser);
+    run(initUser());
   });
 
+  if (isIdle || isLoading) {
+    return <FullPageLoading />;
+  }
+
+  if (isError) {
+    return <FullPageError error={error} />;
+  }
   return (
     <AuthContext.Provider
       children={children}
