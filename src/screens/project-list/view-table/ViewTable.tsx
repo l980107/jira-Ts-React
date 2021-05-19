@@ -1,7 +1,7 @@
 import { IntUser } from '../search-form/SearchForm';
 import { Table, TableProps } from 'antd';
 import dayjs from 'dayjs';
-interface IntProject {
+export interface IntProject {
   id: string;
   name: string;
   personId: string;

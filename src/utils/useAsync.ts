@@ -12,7 +12,16 @@ const defaultInitialState: State<null> = {
   stat: 'idle',
 };
 
-export const useAsync = <D>(initialState?: State<D>) => {
+const defaultInitalError = {
+  throwOnError: false,
+};
+
+export const useAsync = <D>(initialState?: State<D>, initialError?: typeof defaultInitalError) => {
+  const config = {
+    ...defaultInitalError,
+    ...initialError,
+  };
+
   const [state, setState] = useState<State<D>>({
     ...defaultInitialState,
     ...initialState,
@@ -35,32 +44,32 @@ export const useAsync = <D>(initialState?: State<D>) => {
     });
 
   //用来触发异步请求的
-  const run = (promise: Promise<D>) => {
+  const run = async (promise: Promise<D>) => {
     //异常处理
     if (!promise || !promise.then) {
       throw new Error('需要传入 Promise 对象');
     }
     //请求成功设置Data和状态
     setState({ ...state, stat: 'loading' });
-    return promise
-      .then((data) => {
-        setData(data);
-        return data;
-      })
-      .catch((error) => {
-        setError(error);
-        return error;
-      });
+    try {
+      const data = await promise;
+      setData(data);
+      return data;
+    } catch (error) {
+      setError(error);
+      if (config.throwOnError) return Promise.reject(error);
+      return error;
+    }
+  };
 
-    return {
-      isIdle: state.stat === 'idle',
-      isLoading: state.stat === 'loading',
-      isError: state.stat === 'error',
-      isSuccess: state.stat === 'success',
-      run,
-      setData,
-      setError,
-      ...state,
-    };
+  return {
+    isIdle: state.stat === 'idle',
+    isLoading: state.stat === 'loading',
+    isError: state.stat === 'error',
+    isSuccess: state.stat === 'success',
+    run,
+    setData,
+    setError,
+    ...state,
   };
 };

@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import RegisterPage from './RegiserPage';
 import LoginPage from './LoginPage';
-import { Button, Card, Divider } from 'antd';
+import { Button, Card, Divider, message } from 'antd';
 import styled from '@emotion/styled';
 import logo from '../../assets/logo.svg';
 import left from '../../assets/left.svg';
 import right from '../../assets/right.svg';
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState<Boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
   return (
     <Container>
       <Header />
       <Background />
       <ShadowCard>
         <Title>{isLogin ? '请登录' : '请注册'}</Title>
-        {isLogin ? <LoginPage /> : <RegisterPage />}
+        {error ? message.error(error.message) : null}
+        {isLogin ? <LoginPage setError={setError} /> : <RegisterPage setError={setError} />}
         <Divider />
         <Button type={'link'} onClick={() => setIsLogin(!isLogin)}>
           {isLogin ? '还没有账号？去注册一个吧！' : '已经有账号了? 直接登陆吧！'}

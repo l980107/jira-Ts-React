@@ -1,15 +1,7 @@
-const a = {
-  name: 'jack',
-  age: '8',
-  school: 'xiaoxue',
+const userName = 'xiaomw';
+
+const isName = (name) => {
+  name === 'xiaomwww' ? console.log('1') : name === 'xiaomww' ? console.log('2') : console.log(3);
 };
 
-const b = {
-  name: 'jack',
-  age: '18',
-  school: 'daxue',
-};
-
-const c = { ...a, ...b };
-
-console.log(`c`, c);
+isName(userName);

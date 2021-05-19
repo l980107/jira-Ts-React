@@ -1,8 +1,8 @@
 // 真实环境中如果使用了firebase这种第三方auth服务的话，本文件不需要开发者开发
-import { IntUser } from "./screens/project-list/search-form/SearchForm";
+import { IntUser } from './screens/project-list/search-form/SearchForm';
 
 //token
-const localStorageKey = "__auth_provider_token__";
+const localStorageKey = '__auth_provider_token__';
 
 //请求地址
 const aipUrl = process.env.REACT_APP_API_URL;
@@ -20,7 +20,7 @@ export const getToken = () => window.localStorage.getItem(localStorageKey);
  * @returns
  */
 export const handleUserResponse = ({ user }: { user: IntUser }) => {
-  window.localStorage.setItem(localStorageKey, user.token || "");
+  window.localStorage.setItem(localStorageKey, user.token || '');
   return user;
 };
 
@@ -32,16 +32,16 @@ export const handleUserResponse = ({ user }: { user: IntUser }) => {
  */
 export const login = (user: { username: string; password: string }) => {
   return fetch(`${aipUrl}/login`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
   }).then(async (response) => {
     if (response.ok) {
       return handleUserResponse(await response.json());
     } else {
-      return Promise.reject(user);
+      return Promise.reject(await response.json());
     }
   });
 };
@@ -54,16 +54,16 @@ export const login = (user: { username: string; password: string }) => {
  */
 export const register = (user: { username: string; password: string }) => {
   return fetch(`${aipUrl}/register`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
   }).then(async (response) => {
     if (response.ok) {
       return handleUserResponse(await response.json());
     } else {
-      return Promise.reject(user);
+      return Promise.reject(await response.json());
     }
   });
 };
@@ -73,5 +73,4 @@ export const register = (user: { username: string; password: string }) => {
  *
  * @returns void
  */
-export const logout = async () =>
-  window.localStorage.removeItem(localStorageKey);
+export const logout = async () => window.localStorage.removeItem(localStorageKey);
