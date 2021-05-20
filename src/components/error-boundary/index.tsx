@@ -1,4 +1,4 @@
-import React, { Component, PropsWithChildren, ReactElement } from 'react';
+import { Component, PropsWithChildren, ReactElement } from 'react';
 // ReactElement: 就是jsx语句
 interface ErrorBoundaryProps {
   fallbackRender: (props: { error: Error | null }) => ReactElement;

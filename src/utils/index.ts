@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export const isFalsy = (value: unknown) => {
   return value === 0 ? false : !value;
@@ -33,7 +33,9 @@ export const cleanObject = (obj: { [key: string]: unknown }) => {
  * 自定义hook适应页面title
  */
 export const useTitle = (title: string, titleChange: boolean = false) => {
-  const oldTitle = document.title;
+  // const oldTitle = document.title; 形成闭包
+  const oldTitle = useRef(document.title).current;
+
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -44,5 +46,5 @@ export const useTitle = (title: string, titleChange: boolean = false) => {
         document.title = oldTitle;
       }
     };
-  }, []);
+  }, [titleChange, oldTitle]);
 };
