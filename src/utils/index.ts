@@ -47,3 +47,10 @@ export const useTitle = (title: string, titleChange: boolean = false) => {
     };
   }, [titleChange, oldTitle]);
 };
+
+/**
+ * 重置根路由
+ */
+export const resetRouter = () => {
+  return (window.location.href = window.location.origin);
+};

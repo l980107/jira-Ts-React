@@ -5,9 +5,10 @@ import ProjectList from '../../screens/project-list';
 import { Row } from 'components/lib';
 import { ReactComponent as Logo } from '../../assets/software-logo.svg';
 import { DownOutlined } from '@ant-design/icons';
-import { useTitle } from 'utils';
+import { resetRouter, useTitle } from 'utils';
 import { Route, Routes, Navigate } from 'react-router';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+
 import { ProjectScreen } from '../../screens/Project';
 
 export default function Admin() {
@@ -21,6 +22,7 @@ export default function Admin() {
           <Routes>
             <Route path={'/projects'} element={<ProjectList />} />
             <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
+            <Navigate to={'/projects'} />
           </Routes>
         </Router>
       </Main>
@@ -33,7 +35,9 @@ const PageHeader = () => {
   return (
     <Header between={true} marginBottom={false}>
       <HeaderLeft gap={true}>
-        <Logo width={'18rem'} color={'rgb(38,132,255)'} />
+        <NewButton type="link" onClick={resetRouter}>
+          <Logo width={'18rem'} color={'rgb(38,132,255)'} />
+        </NewButton>
         <h3>项目</h3>
         <h3>用户</h3>
       </HeaderLeft>
@@ -58,6 +62,11 @@ const PageHeader = () => {
     </Header>
   );
 };
+
+const NewButton = styled(Button)`
+  padding: 0;
+  border: 0;
+`;
 
 /**
  * grid 和 flex 各自的使用场景

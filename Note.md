@@ -208,9 +208,35 @@ const shenMiRen: Omit<Person, 'name'> = {}; //Error
 
 # 方法总结
 
+## qs JSON
+
 qs.xxx() 和 JSON.xxx() 都是格式化对象的
 
 body.json() 接收一个 response 流，返回一个 promise，promise 解析的 resolve 结果是将文本解析为 json 格式
+
+## window.location
+
+```js
+// 当前浏览器地址为：www.baidu.com:80/a/b/index.html
+
+http: window.location.host;
+// "www.baidu.com:80"
+
+window.location.href;
+// "http://www.baidu.com:80/a/b/index.html"
+
+window.location.protocol;
+// "http:"
+
+window.location.origin;
+// "http://www.baidu.com:80"
+
+window.location.hostname;
+// "www.baidu.com"
+
+window.location.pathname;
+// "/a/b/index.html"
+```
 
 # 动态展示网页 title
 
