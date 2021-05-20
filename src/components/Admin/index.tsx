@@ -17,7 +17,6 @@ export default function Admin() {
     <LayoutPage>
       <PageHeader />
       <Main>
-        {/* <ProjectList /> */}
         <Router>
           <Routes>
             <Route path={'/projects'} element={<ProjectList />} />
