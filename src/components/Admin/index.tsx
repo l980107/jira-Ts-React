@@ -6,43 +6,58 @@ import { Row } from 'components/lib';
 import { ReactComponent as Logo } from '../../assets/software-logo.svg';
 import { DownOutlined } from '@ant-design/icons';
 import { useTitle } from 'utils';
+import { Route, Routes, Navigate } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ProjectScreen } from '../../screens/Project';
 
 export default function Admin() {
-  const { logout, user } = useAuth();
   useTitle('项目列表 - Jira', true);
   return (
     <LayoutPage>
-      <Header between={true} marginBottom={false}>
-        <HeaderLeft gap={true}>
-          <Logo width={'18rem'} color={'rgb(38,132,255)'} />
-          <h3>项目</h3>
-          <h3>用户</h3>
-        </HeaderLeft>
-        <HeaderRight gap={2}>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item>
-                  <Button type={'link'} onClick={logout}>
-                    登出
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Button type={'link'} onClick={(e) => e.preventDefault()}>
-              Hi, {user?.name}
-              <DownOutlined />
-            </Button>
-          </Dropdown>
-        </HeaderRight>
-      </Header>
+      <PageHeader />
       <Main>
-        <ProjectList />
+        {/* <ProjectList /> */}
+        <Router>
+          <Routes>
+            <Route path={'/projects'} element={<ProjectList />} />
+            <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
+          </Routes>
+        </Router>
       </Main>
     </LayoutPage>
   );
 }
+
+const PageHeader = () => {
+  const { logout, user } = useAuth();
+  return (
+    <Header between={true} marginBottom={false}>
+      <HeaderLeft gap={true}>
+        <Logo width={'18rem'} color={'rgb(38,132,255)'} />
+        <h3>项目</h3>
+        <h3>用户</h3>
+      </HeaderLeft>
+      <HeaderRight gap={2}>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item>
+                <Button type={'link'} onClick={logout}>
+                  登出
+                </Button>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <Button type={'link'} onClick={(e) => e.preventDefault()}>
+            Hi, {user?.name}
+            <DownOutlined />
+          </Button>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
+  );
+};
 
 /**
  * grid 和 flex 各自的使用场景

@@ -1,8 +1,10 @@
 import { IntUser } from '../search-form/SearchForm';
 import { Table, TableProps } from 'antd';
 import dayjs from 'dayjs';
+// react-router 和 react-router-dom 关系类似于 react 和 react-dom
+import { Link } from 'react-router-dom';
 export interface IntProject {
-  id: string;
+  id: number;
   name: string;
   personId: string;
   pin: boolean;
@@ -23,8 +25,10 @@ const ViewTable = ({ users, ...props }: IntViewTable) => {
       columns={[
         {
           title: '名称',
-          dataIndex: 'name',
           sorter: (a, b) => a.name.localeCompare(b.name),
+          render: (value, project) => {
+            return <Link to={`${project.id}`}>{project.name}</Link>;
+          },
         },
         {
           title: '部门',

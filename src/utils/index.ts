@@ -12,7 +12,6 @@ export const isVoid = (value: unknown) => value === undefined || value === null 
  * @param obj
  * @returns
  */
-
 // let b: { [key: string]: unknown };
 // b = { name: 'name' };
 // b = { name: 'name', age: '12' };

@@ -224,3 +224,7 @@ const useTitle = (title: string) => {
   }, [title]);
 };
 ```
+
+# Table colmn 渲染
+
+复杂渲染使用 render 可直接渲染使用 dataIndex
