@@ -6,10 +6,13 @@ import styled from '@emotion/styled';
 import logo from '../../assets/logo.svg';
 import left from '../../assets/left.svg';
 import right from '../../assets/right.svg';
+import { useTitle } from 'utils';
+// import { Helmet } from 'react-helmet';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState<Boolean>(true);
   const [error, setError] = useState<Error | null>(null);
+  useTitle('登陆注册 - Jira', true);
   return (
     <Container>
       <Header />

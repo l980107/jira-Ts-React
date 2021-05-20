@@ -1,5 +1,4 @@
 import { useAuth } from '../../context/auth-context';
-
 import { Form, Input } from 'antd';
 import { LongButton } from './index';
 import { useAsync } from 'utils/useAsync';
@@ -18,6 +17,7 @@ const LoginPage = ({ setError }: LoginProps) => {
       setError(e);
     }
   };
+
   return (
     <Form onFinish={handleSubmit}>
       <Form.Item name={'username'} rules={[{ required: true, message: '请输入用户名' }]}>

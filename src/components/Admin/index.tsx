@@ -5,8 +5,12 @@ import ProjectList from '../../screens/project-list';
 import { Row } from 'components/lib';
 import { ReactComponent as Logo } from '../../assets/software-logo.svg';
 import { DownOutlined } from '@ant-design/icons';
+import { useTitle } from 'utils';
+
+// import { Helmet } from 'react-helmet';
 export default function Admin() {
   const { logout, user } = useAuth();
+  useTitle('项目列表 - Jira', true);
   return (
     <LayoutPage>
       <Header between={true} marginBottom={false}>

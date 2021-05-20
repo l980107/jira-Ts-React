@@ -211,3 +211,16 @@ const shenMiRen: Omit<Person, 'name'> = {}; //Error
 qs.xxx() 和 JSON.xxx() 都是格式化对象的
 
 body.json() 接收一个 response 流，返回一个 promise，promise 解析的 resolve 结果是将文本解析为 json 格式
+
+# 动态展示网页 title
+
+1. react.helmet
+2. 自定义 hook(处理错误,在组件被卸载的时候就要重新定义 title)
+
+```ts
+const useTitle = (title: string) => {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+};
+```
